@@ -7,4 +7,5 @@ Infrastructure and SSH-hardening for Ubuntu VM in Azure.
 - config/     — variables and defaults
 - scripts/    — provisioning scripts
 - cloud-init/ — cloud-init templates
-
+- main script - vm-create.sh
+- all done
