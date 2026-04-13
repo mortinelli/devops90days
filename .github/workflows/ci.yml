@@ -17,4 +17,3 @@ jobs:
         run: |
           ls -la
           echo "Running CI pipeline"
-``
