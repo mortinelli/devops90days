@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,3 +28,4 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ghcr.io/mortinelli/devops90days:test
+``
