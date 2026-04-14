@@ -2,12 +2,13 @@
 set -euo pipefail
 set -x
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # load config
-source "$(dirname "$0")/../config/defaults.sh"
+source "$SCRIPT_DIR/config/defaults.sh"
 
 echo "==> Creating VM"
-bash "$(dirname "$0")/create-vm.sh"
+bash "$SCRIPT_DIR/scripts/create-vm.sh"
 
 
 PUBLIC_IP="$(get_public_ip)"
@@ -33,10 +34,10 @@ ssh $SSH_MASTER_OPTS -i "$SSH_PRIV" -Nf "$SSH_HOST"
 
 
 echo "==> Hardening SSH"
-bash "$(dirname "$0")/harden-ssh.sh"
+bash "$SCRIPT_DIR/scripts/harden-ssh.sh"
 
 echo "==> Bootstrapping nginx"
-bash "$(dirname "$0")/bootstrap-nginx.sh"
+bash "$SCRIPT_DIR/scripts/bootstrap-nginx.sh"
 
 
 echo "==> Closing SSH master connection"

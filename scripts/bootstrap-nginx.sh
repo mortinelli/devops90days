@@ -2,6 +2,11 @@
 set -euo pipefail
 set -x
 
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../config/defaults.sh"
+
+
 ###############################################################################
 # SSH BOOTSTRAP (ALL REAL WORK HAPPENS HERE)
 ###############################################################################

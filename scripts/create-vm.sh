@@ -2,10 +2,17 @@
 set -euo pipefail
 set -x
 
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../config/defaults.sh"
+
+
 ###############################################################################
 # SANITY
 ###############################################################################
-[[ -f "$SSH_KEY" ]] || { echo "❌ SSH key not found"; exit 1; }
+
+[[ -f "$SSH_KEY_USER" ]] || { echo "❌ SSH user key not found"; exit 1; }
+[[ -f "$SSH_KEY_CI"   ]] || { echo "❌ SSH CI key not found"; exit 1; }
 
 ###############################################################################
 # RESOURCE GROUP
@@ -75,7 +82,7 @@ az vm create \
   --image "$IMAGE" \
   --size "$VM_SIZE" \
   --admin-username "$ADMIN_USER" \
-  --ssh-key-values "$SSH_KEY" \
+  --ssh-key-values "$SSH_KEY_USER"  "$SSH_KEY_CI" \
   --nsg "$NSG_NAME" \
   --vnet-name "$VNET_NAME" \
   --subnet "$SUBNET_NAME" \

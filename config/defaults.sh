@@ -10,11 +10,12 @@ LOCATION="eastus2"
 
 VM_NAME="ubuntu-vm"
 ADMIN_USER="devopsadmin"
-IMAGE="Ubuntu2404"
-VM_SIZE="Standard_D2ads_v7"
+IMAGE="Canonical:ubuntu-24_04-lts:server:latest"
+VM_SIZE="Standard_D2as_v7"
 
-SSH_KEY="$HOME/.ssh/id_rsa.pub"
+SSH_KEY_USER="$HOME/.ssh/id_rsa.pub"
 SSH_PRIV="$HOME/.ssh/id_rsa"
+SSH_KEY_CI="$HOME/.ssh/ci_deploy_key.pub"
 
 VNET_NAME="vnet-main"
 SUBNET_NAME="subnet-main"
