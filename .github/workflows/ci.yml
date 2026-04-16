@@ -41,6 +41,6 @@ jobs:
             docker rm devops90days || true
             docker run -d \
               --name devops90days \
-              -p 80:80 \
+              -p 8080:80 \
               ghcr.io/mortinelli/devops90days:test
-          EOF    
+EOF    
