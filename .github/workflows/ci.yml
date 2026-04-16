@@ -28,3 +28,19 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ghcr.io/mortinelli/devops90days:test
+      - name: Deploy to VM
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          ssh -o StrictHostKeyChecking=no \
+              devopsadmin@${{ secrets.VM_HOST }} << 'EOF'
+            docker pull ghcr.io/mortinelli/devops90days:test
+            docker stop devops90days || true
+            docker rm devops90days || true
+            docker run -d \
+              --name devops90days \
+              -p 80:80 \
+              ghcr.io/mortinelli/devops90days:test
+          EOF    
