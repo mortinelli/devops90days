@@ -36,17 +36,14 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
 
           # --- deploy over SSH ---
+
           ssh -i ~/.ssh/id_ed25519 \
               -o StrictHostKeyChecking=no \
-              devopsadmin@${{ secrets.VM_HOST }} << 'EOF'
-docker pull ghcr.io/mortinelli/devops90days:test
-docker stop devops90days || true
-docker rm devops90days || true
-docker run -d \
-  --name devops90days \
-  -p 8080:80 \
-  ghcr.io/mortinelli/devops90days:test
-EOF
+              devopsadmin@${{ secrets.VM_HOST }} \
+              "docker pull ghcr.io/mortinelli/devops90days:test &&
+              docker stop devops90days || true &&
+              docker rm devops90days || true &&
+              docker run -d --name devops90days -p 8080:80 ghcr.io/mortinelli/devops90days:test"
 
-          # --- cleanup ---
-          rm -f ~/.ssh/id_ed25519
+           rm -f ~/.ssh/id_ed25519
+
