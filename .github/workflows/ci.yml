@@ -43,7 +43,7 @@ jobs:
               "docker pull ghcr.io/mortinelli/devops90days:test &&
               docker ps -aq --filter 'name=devops90days' | xargs -r docker stop &&
               docker ps -aq --filter 'name=devops90days' | xargs -r docker rm &&
-              docker run -d --name devops90days -p 8080:80 ghcr.io/mortinelli/devops90days:test"
+              docker run -d --name devops90days -p 8880:80 ghcr.io/mortinelli/devops90days:test"
 
            rm -f ~/.ssh/id_ed25519
 
